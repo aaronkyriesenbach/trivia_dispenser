@@ -3,14 +3,17 @@ class Answer:
         self.text = text
         self.correct = correct
 
-    def __eq__(self, other):
-        if not isinstance(other, Answer):
-            return False
-        else:
-            return self.text == other.text and self.correct == other.correct
+    def __key(self):
+        return self.text, self.correct
 
     def __hash__(self):
-        return hash((self.text, self.correct))
+        return hash(self.__key())
+
+    def __eq__(self, other):
+        if isinstance(other, Answer):
+            return self.__key() == other.__key()
+        else:
+            return NotImplemented
 
 
 class Question:
@@ -29,11 +32,14 @@ class Question:
         return f"Question: {self.question}, Answers: {{" + ", ".join(
             [f"{answer.text}: {answer.correct}" for answer in self.answers]) + "}"
 
-    def __eq__(self, other):
-        if not isinstance(other, Question):
-            return False
-        else:
-            return self.question == other.question and self.answers == other.answers
+    def __key(self):
+        return self.question, self.answers
 
     def __hash__(self):
-        return hash((self.question, self.answers))
+        return hash(self.__key())
+
+    def __eq__(self, other):
+        if isinstance(other, Question):
+            return self.__key() == other.__key()
+        else:
+            return NotImplemented
