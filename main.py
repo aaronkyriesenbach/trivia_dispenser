@@ -2,8 +2,7 @@ import csv
 import os
 import time
 
-import adafruit_character_lcd.character_lcd_i2c as character_lcd
-import board
+from RPLCD.i2c import CharLCD
 
 from Question import *
 
@@ -11,8 +10,7 @@ if __name__ == '__main__':
     print("Script started")
 
     # LCD initialization
-    i2c = board.I2C()
-    lcd = character_lcd.Character_LCD_I2C(i2c, 20, 4, address=0x27)
+    lcd = CharLCD(i2c_expander="PCF8574", address=0x27, cols=20, rows=4)
     print("Here")
     lcd.backlight = True
     lcd.message = "Hello world!"
