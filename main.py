@@ -12,8 +12,7 @@ if __name__ == '__main__':
     # LCD initialization
     lcd = CharLCD(i2c_expander="PCF8574", address=0x27, cols=20, rows=4)
     print("Here")
-    lcd.backlight = True
-    lcd.message = "Hello world!"
+    lcd.write_string("Hello world!")
     time.sleep(5)
 
     # Question initialization
