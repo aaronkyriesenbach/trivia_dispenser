@@ -1,5 +1,6 @@
 import csv
 import os
+import time
 
 import adafruit_character_lcd.character_lcd_i2c as character_lcd
 import board
@@ -14,11 +15,8 @@ if __name__ == '__main__':
     lcd = character_lcd.Character_LCD_I2C(i2c, 20, 4, address=0x27)
     print("Here")
     lcd.backlight = True
-    # lcd.message = "Hello world!"
-    # print("Message written")
-    #
-    while True:
-        print("Message written")
+    lcd.message = "Hello world!"
+    time.sleep(5)
 
     # Question initialization
     questions: set[Question] = set()
