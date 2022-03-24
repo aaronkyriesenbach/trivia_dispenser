@@ -10,6 +10,7 @@ if __name__ == '__main__':
     # LCD initialization
     i2c = board.I2C()
     lcd = character_lcd.Character_LCD_I2C(i2c, 20, 4, address=0x27)
+    lcd.backlight = True
     lcd.message = "Hello world!"
 
     while True:
