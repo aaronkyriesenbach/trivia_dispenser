@@ -18,7 +18,9 @@ if __name__ == '__main__':
     # lcd.message = "Hello world!"
     # print("Message written")
     #
-    time.sleep(100)
+    while True:
+        print("Message written")
+        time.sleep(1)
 
     # Question initialization
     questions: set[Question] = set()
