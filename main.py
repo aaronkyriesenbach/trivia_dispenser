@@ -3,14 +3,13 @@ import os
 
 import adafruit_character_lcd.character_lcd_i2c as character_lcd
 import board
-import busio
 
 from Question import *
 
 if __name__ == '__main__':
     # LCD initialization
-    i2c = busio.I2C(board.SCL, board.SDA)
-    lcd = character_lcd.Character_LCD_I2C(i2c, 20, 4)
+    i2c = board.I2C()
+    lcd = character_lcd.Character_LCD_I2C(i2c, 20, 4, address=0x27)
     lcd.message = "Hello world!"
 
     # Question initialization
