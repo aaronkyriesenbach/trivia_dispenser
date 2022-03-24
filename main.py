@@ -1,6 +1,5 @@
 import csv
 import os
-import time
 
 import adafruit_character_lcd.character_lcd_i2c as character_lcd
 import board
@@ -20,7 +19,6 @@ if __name__ == '__main__':
     #
     while True:
         print("Message written")
-        time.sleep(1)
 
     # Question initialization
     questions: set[Question] = set()
