@@ -12,6 +12,7 @@ if __name__ == '__main__':
     lcd = character_lcd.Character_LCD_I2C(i2c, 20, 4, address=0x27)
     lcd.backlight = True
     lcd.message = "Hello world!"
+    print("Message written")
 
     while True:
         pass
