@@ -8,10 +8,10 @@ import busio
 from Question import *
 
 if __name__ == '__main__':
-    # LCD initialization
-    # i2c = busio.I2C(board.SCL, board.SDA)
-    # lcd = character_lcd.Character_LCD_I2C(i2c, 20, 4)
-    # lcd.message = "Hello world!"
+    LCD initialization
+    i2c = busio.I2C(board.SCL, board.SDA)
+    lcd = character_lcd.Character_LCD_I2C(i2c, 20, 4)
+    lcd.message = "Hello world!"
 
     # Question initialization
     questions: set[Question] = set()
