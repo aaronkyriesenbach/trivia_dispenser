@@ -2,7 +2,8 @@ import csv
 import os
 import time
 
-from RPLCD.i2c import CharLCD
+from RPi import GPIO
+from RPLCD.gpio import CharLCD
 
 from Question import *
 
@@ -10,7 +11,8 @@ if __name__ == '__main__':
     print("Script started")
 
     # LCD initialization
-    lcd = CharLCD(i2c_expander="PCF8574", address=0x27, cols=20, rows=4)
+    lcd = CharLCD(pin_rs=15, pin_rw=18, pin_e=16, pins_data=[21, 22, 23, 24],
+                  numbering_mode=GPIO.BOARD, cols=20, rows=4)
     print("Here")
     lcd.write_string("Hello world!")
     time.sleep(5)
