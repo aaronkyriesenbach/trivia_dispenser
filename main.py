@@ -13,7 +13,6 @@ if __name__ == '__main__':
     # LCD initialization
     lcd = CharLCD(pin_rs=15, pin_rw=18, pin_e=16, pins_data=[21, 22, 23, 24],
                   numbering_mode=GPIO.BOARD, cols=20, rows=4)
-    print("Here")
     lcd.clear()
     lcd.write_string("Hello world, this is yet another message!!")
     time.sleep(5)
@@ -21,7 +20,7 @@ if __name__ == '__main__':
     # Question initialization
     questions: set[Question] = set()
 
-    BASE_USB_PATH = "/media/pi/questionusb"
+    BASE_USB_PATH = "/media/usb0"
     with open((BASE_USB_PATH + "/questions.csv") if os.path.isdir(BASE_USB_PATH) else "test_questions.csv") as csvfile:
         csv_reader = csv.reader(csvfile)
         for row in csv_reader:
