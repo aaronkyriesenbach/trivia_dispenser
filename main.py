@@ -14,7 +14,7 @@ if __name__ == '__main__':
     lcd = CharLCD(pin_rs=15, pin_rw=18, pin_e=16, pins_data=[21, 22, 23, 24],
                   numbering_mode=GPIO.BOARD, cols=20, rows=4)
     print("Here")
-    lcd.write_string("Hello world!")
+    lcd.write_string("Hello world, this is another message!!")
     time.sleep(5)
 
     # Question initialization
