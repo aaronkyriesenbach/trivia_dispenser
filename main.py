@@ -1,6 +1,9 @@
 import csv
 import os
 import time
+import digitalio
+import board
+import adafruit_matrixkeypad
 
 import RPi.GPIO as GPIO
 from RPLCD.gpio import CharLCD
@@ -15,7 +18,21 @@ if __name__ == '__main__':
                   numbering_mode=GPIO.BOARD, cols=20, rows=4)
     lcd.clear()
     lcd.write_string("Hello world, this is yet another message!!")
-    time.sleep(5)
+
+    # Keypad initialization
+    cols = [digitalio.DigitalInOut(x) for x in (board.D5, board.D6, board.D13, board.D19)]
+    rows = [digitalio.DigitalInOut(x) for x in (board.D26, board.D16, board.D20, board.D21)]
+    keys = [(1, 2, 3, "A"),
+            (4, 5, 6, "B"),
+            (7, 8, 9, "C"),
+            (0, "F", "E", "D")]
+    keypad = adafruit_matrixkeypad.Matrix_Keypad(rows, cols, keys)
+
+    while True:
+        keys = keypad.pressed_keys
+        if keys:
+            lcd.clear()
+            lcd.write_string(keys)
 
     # Question initialization
     questions: set[Question] = set()
