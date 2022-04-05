@@ -2,7 +2,7 @@ import csv
 import os
 import time
 
-from RPi import GPIO
+import RPi.GPIO as GPIO
 from RPLCD.gpio import CharLCD
 
 from Question import *
