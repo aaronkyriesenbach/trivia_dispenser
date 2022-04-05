@@ -15,7 +15,7 @@ if __name__ == '__main__':
                   numbering_mode=GPIO.BOARD, cols=20, rows=4)
     print("Here")
     lcd.clear()
-    lcd.write_string("Hello world, this is another message!!")
+    lcd.write_string("Hello world, this is yet another message!!")
     time.sleep(5)
 
     # Question initialization
