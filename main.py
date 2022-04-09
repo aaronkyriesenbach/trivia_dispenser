@@ -1,23 +1,20 @@
-import csv
-import os
-import time
-import digitalio
-import board
+import adafruit_character_lcd.character_lcd as characterlcd
 import adafruit_matrixkeypad
+import board
+import digitalio
 
-import RPi.GPIO as GPIO
-from RPLCD.gpio import CharLCD
-
-from Question import *
+PIN_RS = digitalio.DigitalInOut(board.D2)
+PIN_EN = digitalio.DigitalInOut(board.D3)
+PIN_D4 = digitalio.DigitalInOut(board.D4)
+PIN_D5 = digitalio.DigitalInOut(board.D17)
+PIN_D6 = digitalio.DigitalInOut(board.D27)
+PIN_D7 = digitalio.DigitalInOut(board.D22)
 
 if __name__ == '__main__':
-    print("Script started")
-
     # LCD initialization
-    lcd = CharLCD(pin_rs=15, pin_rw=18, pin_e=16, pins_data=[21, 22, 23, 24],
-                  numbering_mode=GPIO.BOARD, cols=20, rows=4)
-    lcd.clear()
-    lcd.write_string("Hello world, this is yet another message!!")
+    lcd = characterlcd.Character_LCD_Mono(PIN_RS, PIN_EN, PIN_D4, PIN_D5, PIN_D6, PIN_D7, 20, 4)
+
+    lcd.message = "Hello world!"
 
     # Keypad initialization
     cols = [digitalio.DigitalInOut(x) for x in (board.D5, board.D6, board.D13, board.D19)]
@@ -32,7 +29,7 @@ if __name__ == '__main__':
         keys = keypad.pressed_keys
         if keys:
             lcd.clear()
-            lcd.write_string(keys)
+            lcd.message = ''.join(str(k) for k in keys)
 
     # Question initialization
     questions: set[Question] = set()
