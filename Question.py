@@ -1,6 +1,10 @@
+from enum import Enum
+from typing import Union
+
+
 class Answer:
-    def __init__(self, text: str, correct: bool):
-        self.text = text
+    def __init__(self, value: Union[str, float], correct: bool):
+        self.text = value
         self.correct = correct
 
     def __key(self):
@@ -16,9 +20,14 @@ class Answer:
             return NotImplemented
 
 
+class QuestionType(Enum):
+    MULTIPLE_CHOICE = "multiple choice"
+    NUMERICAL = "numerical"
+
+
 class Question:
 
-    def __init__(self, text: str, answers: frozenset[Answer]):
+    def __init__(self, text: str, answers: frozenset[Answer], question_type: QuestionType):
         if text is None or len(text) > 64 or len(text) == 0:
             raise ValueError("Question must be between 0 and 64 characters")
 
@@ -27,13 +36,14 @@ class Question:
 
         self.text = text
         self.answers = answers
+        self.question_type = question_type
 
     def __str__(self):
-        return f"Question: {self.text}, Answers: {{" + ", ".join(
+        return f"Question: {self.text}, Type: {self.question_type}, Answers: {{" + ", ".join(
             [f"{answer.text}: {answer.correct}" for answer in self.answers]) + "}"
 
     def __key(self):
-        return self.text, self.answers
+        return self.text, self.answers, self.question_type
 
     def __hash__(self):
         return hash(self.__key())
