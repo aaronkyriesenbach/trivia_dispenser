@@ -59,7 +59,7 @@ def get_questions():
             answers: set[Answer] = set()
 
             if len(row) == 2:
-                answers.add(Answer(float(row[1]), True))
+                answers.add(Answer(int(row[1]), True))
             else:
                 for i in range(1, len(row), 2):
                     answers.add(Answer(row[i], bool(int(row[i + 1]))))
@@ -84,7 +84,7 @@ def get_num_answer_from_str(answer: str):
 
 def display_answer_options(answers):
     for answer in answers:
-        display_message(answer.text)
+        display_message(answer.value)
         time.sleep(3)
 
     display_message("What is the correct answer?")
@@ -134,9 +134,15 @@ if __name__ == '__main__':
                             else:
                                 display_message("Please enter a valid answer!")
             else:
-                answerstr = ""
+                oldanswerstr = answerstr = ""
+
+                # Initial display to clear screen
+                display_message(answerstr)
                 while True:
-                    display_message(answerstr)
+                    if answerstr != oldanswerstr:
+                        display_message(answerstr)
+
+                    oldanswerstr = answerstr
 
                     keys = keypad.pressed_keys
 
@@ -144,10 +150,20 @@ if __name__ == '__main__':
                         pressed_key = get_pressed_key(keys)
 
                         if pressed_key.isdigit():
-                            answerstr += pressed_key;
+                            answerstr += pressed_key
                         elif pressed_key == 'D':
                             answerstr = answerstr[:-1]
+                        elif pressed_key == 'E':
+                            answer = int(answerstr)
 
+                            if answer == list(question.answers)[0].value:
+                                display_message("Correct!")
+                                correct_answer_count += 1
+                            else:
+                                display_message("Incorrect :(")
+                            time.sleep(1)
+                            break
+                        time.sleep(0.25)
 
             if correct_answer_count >= CORRECT_ANSWER_THRESHOLD:
                 break
