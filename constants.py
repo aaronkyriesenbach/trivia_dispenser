@@ -23,7 +23,6 @@ keys = [(1, 2, 3, "A"),
         (7, 8, 9, "C"),
         (0, "F", "E", "D")]
 
-# Dispenser wheel
-PWM_WHEEL = pwmio.PWMOut(board.D12, duty_cycle=2 ** 15, frequency=50)
-BASE_ANGLE = 65
-DISPENSE_ANGLE = 30
+# Servos
+PWM_WHEEL = pwmio.PWMOut(board.D12, frequency=50)
+PWM_DOOR = pwmio.PWMOut(board.D7, duty_cycle=2 ** 15, frequency=50)

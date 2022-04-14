@@ -14,7 +14,12 @@ def init_keypad():
 
 
 def init_dispenser_wheel():
-    wheel = servo.Servo(PWM_WHEEL)
-    wheel.angle = BASE_ANGLE
+    wheel = servo.ContinuousServo(PWM_WHEEL)
 
     return wheel
+
+
+def init_door():
+    door = servo.Servo(PWM_DOOR)
+
+    return door
