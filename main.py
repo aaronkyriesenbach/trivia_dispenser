@@ -10,7 +10,7 @@ from hwinit import *
 lcd = init_lcd()
 keypad = init_keypad()
 wheel = init_dispenser_wheel()
-door = init_door()
+door1, door2 = init_doors()
 
 
 def display_message(message: str):
@@ -41,12 +41,14 @@ def dispense():
 
     # Pause for 0.1 secs
     wheel.throttle = 0
-    time.sleep(0.5)
+    time.sleep(0.1)
 
     # Run backwards for 0.5 secs
     wheel.throttle = -1
     time.sleep(0.5)
     wheel.throttle = 0
+
+    open_door()
 
 
 def get_questions():
@@ -88,6 +90,17 @@ def display_answer_options(answers):
         time.sleep(3)
 
     display_message("What is the correct answer?")
+
+
+def increment_door_angle(angle):
+    door1.angle -= angle
+    door2.angle += angle
+
+
+def open_door():
+    increment_door_angle(70)
+    time.sleep(5)
+    increment_door_angle(-70)
 
 
 if __name__ == '__main__':

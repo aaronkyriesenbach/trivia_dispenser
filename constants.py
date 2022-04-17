@@ -25,4 +25,5 @@ keys = [(1, 2, 3, "A"),
 
 # Servos
 PWM_WHEEL = pwmio.PWMOut(board.D12, frequency=50)
-PWM_DOOR = pwmio.PWMOut(board.D7, duty_cycle=2 ** 15, frequency=50)
+PWM_DOOR_1 = pwmio.PWMOut(board.D7, duty_cycle=2 ** 15, frequency=50)
+PWM_DOOR_2 = pwmio.PWMOut(board.D8, duty_cycle=2 ** 15, frequency=50)

@@ -19,7 +19,11 @@ def init_dispenser_wheel():
     return wheel
 
 
-def init_door():
-    door = servo.Servo(PWM_DOOR)
+def init_doors():
+    door1 = servo.Servo(PWM_DOOR_1)
+    door2 = servo.Servo(PWM_DOOR_2)
 
-    return door
+    door1.angle = 180
+    door2.angle = 0
+
+    return door1, door2
